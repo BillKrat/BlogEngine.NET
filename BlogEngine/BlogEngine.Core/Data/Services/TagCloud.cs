@@ -21,6 +21,13 @@ namespace BlogEngine.Core.Data.Services
         {
             MinimumPosts = 1;
             TagCloudSize = -1;
+
+            Post.Saved += Post_Saved;
+        }
+
+        private void Post_Saved(object sender, SavedEventArgs e)
+        {
+            weightedList = new Dictionary<Guid, Dictionary<string, string>>();
         }
 
         /// <summary>
@@ -87,6 +94,9 @@ namespace BlogEngine.Core.Data.Services
         private void SortList()
         {
             var dic = CreateRawList();
+            if (dic.Values.Count == 0)
+                return;
+
             var max = dic.Values.Max();
 
             var currentTagCount = 0;

@@ -18,8 +18,6 @@ namespace BlogEngine.Core.Data
             var rwr = Utils.RelativeWebRoot;
             var responsePath = "root";
 
-            path = path.SanitizePath();
-
             if(string.IsNullOrEmpty(path))
                 path = Blog.CurrentInstance.StorageLocation + Utils.FilesFolder;
 

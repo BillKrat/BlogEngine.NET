@@ -6,29 +6,34 @@ using System.Xml;
 
 namespace BlogEngine.Core.Data.ViewModels
 {
-    /// <summary>
-    /// List of zones and widgets
-    /// for a current theme
-    /// </summary>
     public class WidgetsVM
     {
-        /// <summary>
-        /// Theme widtegs
-        /// </summary>
         public WidgetsVM()
         {
             try
             {
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                WebClient client = new WebClient();
+                client.Headers["User-Agent"] = " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36";
+
                 var packages = Packaging.FileSystem.LoadWidgets();
                 AvailableWidgets = new List<WidgetItem>();
                 foreach (var pk in packages)
                 {
-                    var showUninstall = !string.IsNullOrEmpty(pk.OnlineVersion);                   
-                    AvailableWidgets.Add(new WidgetItem { Id = pk.Id, Name = pk.Title, Title = pk.Title, ShowTitle = false, ShowUnistall = showUninstall });
+                    try
+                    {
+                        var showUninstall = !string.IsNullOrEmpty(pk.OnlineVersion);
+                        AvailableWidgets.Add(new WidgetItem { Id = pk.Id, Name = pk.Title, Title = pk.Title, ShowTitle = false, ShowUnistall = showUninstall });
+                    }
+                    catch(Exception ex)
+                    {
+                        Utils.Log("Packages: "+ex.Message+ex.StackTrace);
+                    }
                 }
 
                 WidgetZones = new List<WidgetZone>();
-                WebClient client = new WebClient();
 
                 // add zones registered in site.master
                 var html = client.DownloadString(Utils.AbsoluteWebRoot);
@@ -51,7 +56,7 @@ namespace BlogEngine.Core.Data.ViewModels
                 }
             }
             catch (Exception ex) {
-                Utils.Log(ex.Message);
+                Utils.Log(ex.Message+ex.StackTrace);
             }
         }
         /// <summary>
@@ -128,7 +133,9 @@ namespace BlogEngine.Core.Data.ViewModels
                     else { break; }
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                Utils.Log(ex.Message + ex.StackTrace);
+            }
         }
     }
 

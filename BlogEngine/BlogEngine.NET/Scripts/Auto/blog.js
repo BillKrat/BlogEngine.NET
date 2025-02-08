@@ -97,7 +97,7 @@ BlogEngine = {
         var notify = BlogEngine.$("cbNotify") ? BlogEngine.$("cbNotify").checked : false;
         var replyToId = BlogEngine.comments.replyToId ? BlogEngine.comments.replyToId.value : "";
 
-        var recaptchaResponseField = document.getElementById('recaptcha_response_field');
+        var recaptchaResponseField = document.getElementById('g-recaptcha-response'); //  'recaptcha_response_field');
         var recaptchaResponse = recaptchaResponseField ? recaptchaResponseField.value : "";
 
         var recaptchaChallengeField = document.getElementById('recaptcha_challenge_field');

@@ -10,6 +10,7 @@
     using System.Web.Hosting;
     using System.IO;
     using System.Web.Caching;
+    using System.Linq;
 
     /// <summary>
     /// Represents the configured settings for the blog engine.
@@ -168,6 +169,29 @@
             }
             return isRazorTheme ? "RazorHost" : theme;
         }
+
+
+        /// <summary>
+        /// Show post if: 
+        /// 1. DaysCommentsAreEnabled <> 1
+        /// 2. DaysCommentsAreEnabled == 1 and post has Public category
+        /// 3. DaysCommentsAreEnabled == 1 and user is Authenticated
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
+        public bool IsPpostShown(Post post)
+        {
+            var user = Security.CurrentUser.Identity.Name;
+            var isAuthenticated = !string.IsNullOrEmpty(user);
+            if(BlogSettings.Instance.DaysCommentsAreEnabled == 365 && !isAuthenticated)
+            {
+                var isPublic = post.Categories.Any(c => c.Title == "Public");
+                return isPublic;
+            }
+            return true;
+        }
+
+
 
         #region Description
 
@@ -420,27 +444,27 @@
                     var request = context.Request;
                     if (request.QueryString["theme"] != null)
                     {
-                        return request.QueryString["theme"].SanitizePath();
+                        return request.QueryString["theme"];
                     }
 
                     var cookie = request.Cookies[this.ThemeCookieName];
                     if (cookie != null)
                     {
-                        return cookie.Value.SanitizePath();
+                        return cookie.Value;
                     }
 
                     if (Utils.ShouldForceMainTheme(request))
                     {
-                        return this.configuredTheme.SanitizePath();
+                        return this.configuredTheme;
                     }
                 }
 
-                return this.configuredTheme.SanitizePath();
+                return this.configuredTheme;
             }
 
             set
             {
-                this.configuredTheme = String.IsNullOrEmpty(value) ? String.Empty : value.SanitizePath();
+                this.configuredTheme = String.IsNullOrEmpty(value) ? String.Empty : value;
             }
         }
 
@@ -1412,10 +1436,13 @@
 
         #region EditorOptions
 
+        public bool PostOptionsAuthors { get; set; }
         public bool PostOptionsSlug { get; set; }
         public bool PostOptionsDescription { get; set; }
         public bool PostOptionsCustomFields { get; set; }
 
+
+        public bool PageOptionsAuthors { get; set; }
         public bool PageOptionsSlug { get; set; }
         public bool PageOptionsDescription { get; set; }
         public bool PageOptionsCustomFields { get; set; }

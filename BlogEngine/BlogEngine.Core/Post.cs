@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Net.Mail;
     using System.Text;
-    using System.Text.RegularExpressions;
     using System.Web;
 
     using BlogEngine.Core.Data.Models;
@@ -253,6 +252,17 @@
             }
         }
 
+        protected static bool HasRoleAccess(BlogEngine.Core.Post p)
+        {
+            if (p.CustomFields != null && p.CustomFields.ContainsKey("Role"))
+            {
+                var customField = p.CustomFields["Role"];
+                var returnValue = Security.GetCurrentUserRoles().ToList().Contains(customField.Value);
+                return returnValue;
+            }
+            return true;
+        }
+
         /// <summary>
         ///     Gets a sorted collection of all undeleted posts across all blogs.
         ///     Sorted by date.
@@ -322,6 +332,12 @@
                 else
                     return Posts;
             }
+        }
+
+        public static bool IsAuthorizedRole(Post post)
+        {
+            var returnValue = HasRoleAccess(post);
+            return returnValue;
         }
 
         /// <summary>
@@ -673,8 +689,13 @@
             {
                 if (this.IsDeleted)
                     return false;
+
+                else if (!Security.IsInRole(this))
+                    return false;
+
                 else if (this.IsPublished && this.DateCreated <= BlogSettings.Instance.FromUtc())
                     return true;
+
                 else if (Security.IsAuthorizedTo(Rights.ViewUnpublishedPosts))
                     return true;
 
@@ -695,27 +716,28 @@
         }
 
         /// <summary>
-        /// URL of the first image in the post, if any.
-        /// If there's no first image, returns the URL to "images/defaultImg.jpg" in the current theme used in the blog
+        /// URL of the first image in the post, if any
         /// </summary>
         public string FirstImgSrc
         {
             get
             {
-                string srcValue = null;
-                if (!string.IsNullOrEmpty(content))
+                int idx = Content.IndexOf("<img src=");
+                if (idx > 0)
                 {
-                    Match match = Regex.Match(content, @"<img\s+?.*?src=('|"")(.*?)\1.*?>", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-                    if (match.Success)
+                    try
                     {
-                        srcValue = match.Groups[2].Value;
+                        idx = idx + 10;
+                        var idxEnd = Content.IndexOf("\"", idx);
+                        if (idxEnd > idx)
+                        {
+                            var len = idxEnd - idx;
+                            return Content.Substring(idx, len);
+                        }
                     }
+                    catch (Exception) { }
                 }
-                if (string.IsNullOrEmpty(srcValue))
-                {
-                    srcValue = Utils.RelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/images/defaultImg.jpg";
-                }
-                return srcValue;
+                return "";
             }
         }
 
@@ -1612,7 +1634,8 @@
             var updateAndPublish = false;
             try
             {
-                var isOldPublished = BlogService.SelectPost(Id).IsPublished;
+                var post = BlogService.SelectPost(Id);
+                var isOldPublished = post.IsPublished;
                 if(isPublished && !isOldPublished && !isDeleted)
                 {
                     updateAndPublish = true;
@@ -1953,9 +1976,15 @@
                     Subject = $"New comment on {Title}",
                     Body = sb.ToString()
                 };
-
-                mail.To.Add(email);
-                Utils.SendMailMessageAsync(mail);
+                try
+                {
+                    mail.To.Add(email);
+                    Utils.SendMailMessageAsync(mail);
+                }
+                catch (Exception ex)
+                {
+                    Utils.Log($"Could not send email to [{email}]  Reason: {ex.Message} Title:{comment.Parent?.Title}  Post Id: {comment.Parent?.Id}");
+                }
             }
         }
 

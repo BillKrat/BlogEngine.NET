@@ -327,7 +327,7 @@
         /// </param>
         private void LoadXmlRequest(string xml)
         {
-            var request = new XmlDocument() { XmlResolver = null };
+            var request = new XmlDocument();
             try
             {
                 if (!(xml.StartsWith("<?xml") || xml.StartsWith("<method")))

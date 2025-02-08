@@ -518,6 +518,7 @@ namespace BlogEngine.Core
 
                         string rawUrl = VirtualPathUtility.AppendTrailingSlash(context.Request.RawUrl);
                         string hostname = context.Request.Url.Host;
+                        //hostname = context.Request.Url.AbsolutePath;
 
                         for (int i = 0; i < blogs.Count; i++)
                         {
@@ -546,7 +547,7 @@ namespace BlogEngine.Core
 
                                 // second check the path.
 
-                                if (rawUrl.StartsWith(checkBlog.RelativeWebRoot, StringComparison.OrdinalIgnoreCase))
+                                if (rawUrl.Replace("?","/").StartsWith(checkBlog.RelativeWebRoot, StringComparison.OrdinalIgnoreCase))
                                 {
                                     blog = checkBlog;
                                     break;
@@ -560,6 +561,7 @@ namespace BlogEngine.Core
                         {
                             blog = blogs.FirstOrDefault(b => b.IsPrimary);
                         }
+                        context.Items["rawUrl"] = rawUrl;
                     }
                 }
 

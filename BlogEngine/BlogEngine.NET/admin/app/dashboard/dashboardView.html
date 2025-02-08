@@ -118,31 +118,18 @@
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4">
-                <!--<div class="panel panel-default dashboard-gallery" data-ng-if="security.showTabCustom">
-                    <div class="panel-heading">
-                        <div class="panel-title clearfix">
-                            <span class="pull-left">{{lbl.latestFromTheGallery}}</span>
-                        </div>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item clearfix" data-ng-repeat="pkg in packages">
-                            <a href="" ng-click="getGalleryLink(pkg.PackageType, pkg.Id)" class="item-link">
-                                <img ng-if="pkg.IconUrl.length > 0" class="item-img" width="50" height="50" ng-src="{{pkg.IconUrl}}" />
-                                <img ng-if="pkg.IconUrl.length == 0" class="item-img" width="50" height="50" src="../Content/Images/blog/pkg.png" />
-                                <span class="item-title">{{pkg.Title}}</span>
-                                <span class="item-desc text-ellipsis">{{pkg.Description}}</span>
-                            </a>
-                        </li>
-                        <li id="gal-spinner" class="list-group-item item-spinner">
-                            <i class="fa fa-spinner fa-spin"></i>
-                        </li>
-                    </ul>
-                </div>-->
-                <div data-ng-repeat="n in news" class="form-group">
-                    <a href="{{n.OptionValue}}" target="_blank">
-                        <img class="img-rounded" ng-src="https://blogengine.io/files/images/news/{{n.OptionName}}.png" style="max-width:100%;" alt="{{n.OptionName}}" />
-                    </a>
-                </div>
+                <a href="http://www.adventuresontheedge.net/bloghelp" target="_blank">
+                    <table>
+                        <tr>
+                            <td>
+                                <img class="img-rounded" ng-src="http://adventuresOnTheEdge.net/pics/headbang.gif" style="max-width:100%;" />
+                            </td>
+                            <td>
+                                &nbsp;<span style="font-size:xx-large">Need help?</span><br />Click here to view tutorials
+                            </td>
+                        </tr>
+                    </table>
+                </a>
                 <div id="news-spinner" class="list-group-item item-spinner">
                     <i class="fa fa-spinner fa-spin"></i>
                 </div>

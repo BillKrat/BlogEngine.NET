@@ -250,7 +250,7 @@ namespace BlogEngine.Core.Data.ViewModels
 
         string GetLogFile()
         {
-            string fileLocation = HostingEnvironment.MapPath(Path.Combine(BlogConfig.StorageLocation, "logger.txt"));
+            string fileLocation = HostingEnvironment.MapPath(Path.Combine(Blog.CurrentInstance.StorageLocation, "logger.txt"));
             var items = new List<SelectOption>();
 
             if (File.Exists(fileLocation))

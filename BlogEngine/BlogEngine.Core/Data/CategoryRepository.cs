@@ -17,7 +17,7 @@ namespace BlogEngine.Core.Data
         /// </summary>
         /// <param name="take">Items per page, default 10, 0 to return all</param>
         /// <param name="skip">Items to skip</param>
-        /// <param name="filter">Filter, for example filter=IsPublished,true,Author,Admin</param>
+        /// <param name="filter">Filter, forf example filter=IsPublished,true,Author,Admin</param>
         /// <param name="order">Sort order, for example order=DateCreated,desc</param>
         /// <returns>List of items</returns>
         public IEnumerable<CategoryItem> Find(int take = 10, int skip = 0, string filter = "", string order = "")

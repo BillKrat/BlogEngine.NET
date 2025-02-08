@@ -1,4 +1,6 @@
-﻿angular.module('blogAdmin').controller('DashboardController', ["$rootScope", "$scope", "$location", "$log", "$filter", "dataService", function ($rootScope, $scope, $location, $log, $filter, dataService) {
+﻿angular.module('blogAdmin')
+    .controller('DashboardController', ["$rootScope", "$scope", "$location", "$log", "$filter", "dataService",
+        function ($rootScope, $scope, $location, $log, $filter, dataService) {
     $scope.vm = {};
     $scope.itemToPurge = {};
     $scope.news = [];

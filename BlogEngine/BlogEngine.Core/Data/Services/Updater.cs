@@ -23,6 +23,8 @@ namespace BlogEngine.Core.Data.Services
         /// <returns>Latest BE version</returns>
         public string Check(string version)
         {
+            return ""; // Address no longer available for nuget updates
+
             try
             {
                 if (_root.EndsWith("\\")) 

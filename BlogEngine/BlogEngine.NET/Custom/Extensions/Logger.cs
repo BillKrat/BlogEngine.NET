@@ -126,9 +126,7 @@ namespace App_Code.Extensions
                     using (var fs = new FileStream(file, FileMode.Append))
                     using (var sw = new StreamWriter(fs))
                     {
-                        sw.WriteLine(@"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
-                        sw.WriteLine("{0}: {1}", Resources.labels.date, DateTime.Now);
-                        sw.WriteLine(logMsg);
+                        sw.WriteLine("{0}: {1} : {2} ", Resources.labels.date, DateTime.Now, logMsg);
                     }
                 }
                 catch

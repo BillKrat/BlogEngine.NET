@@ -80,8 +80,7 @@
         bindCommon();
         $('#form').validate({
             rules: {
-                txtSlug: { required: true },
-                txtExcerpt: { maxlength: 200 }
+                txtSlug: { required: true }
             }
         });
     });

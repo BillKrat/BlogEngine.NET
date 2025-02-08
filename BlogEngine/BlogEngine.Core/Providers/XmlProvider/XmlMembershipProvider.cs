@@ -1,22 +1,23 @@
 ﻿namespace BlogEngine.Core.Providers
 {
+    using BlogEngine.Core.Data.Contracts;
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Security.Permissions;
     using System.Web;
     using System.Web.Hosting;
     using System.Web.Security;
     using System.Xml;
-    using System.IO;
 
     /// <summary>
     /// The xml membership provider.
     /// </summary>
-    public class XmlMembershipProvider : MembershipProvider
+    public class XmlMembershipProvider : MembershipProvider, IMembershipProvider
     {
         #region Constants and Fields
 
@@ -250,7 +251,7 @@
                 {
                     continue;
                 }
-                
+
                 string passwordPrep = this.passwordFormat == MembershipPasswordFormat.Hashed ? Utils.HashPassword(newPassword) : newPassword;
 
                 node["Password"].InnerText = passwordPrep;
@@ -293,13 +294,13 @@
         /// <param name="status">The status.</param>
         /// <returns>A Membership User.</returns>
         public override MembershipUser CreateUser(
-            string username, 
-            string password, 
-            string email, 
-            string passwordQuestion, 
-            string passwordAnswer, 
-            bool approved, 
-            object providerUserKey, 
+            string username,
+            string password,
+            string email,
+            string passwordQuestion,
+            string passwordAnswer,
+            bool approved,
+            object providerUserKey,
             out MembershipCreateStatus status)
         {
             this.ReadMembershipDataStore();
@@ -337,18 +338,18 @@
 
             status = MembershipCreateStatus.Success;
             var user = new MembershipUser(
-                this.Name, 
-                username, 
-                username, 
-                email, 
-                passwordQuestion, 
-                passwordPrep, 
-                approved, 
-                false, 
-                DateTime.Now, 
-                DateTime.Now, 
-                DateTime.Now, 
-                DateTime.Now, 
+                this.Name,
+                username,
+                username,
+                email,
+                passwordQuestion,
+                passwordPrep,
+                approved,
+                false,
+                DateTime.Now,
+                DateTime.Now,
+                DateTime.Now,
+                DateTime.Now,
                 DateTime.MaxValue);
             this.users[Blog.CurrentInstance.Id].Add(username, user);
             return user;
@@ -411,6 +412,12 @@
             string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             throw new NotSupportedException();
+        }
+
+        public MembershipUserCollection GetAllUsers(
+                    int pageIndex, int pageSize, out int totalRecords, string process)
+        {
+            return GetAllUsers(pageIndex, pageSize, out totalRecords);
         }
 
         /// <summary>
@@ -731,15 +738,29 @@
             {
                 if (user.Comment.Length > 30)
                 {
-                    node.ChildNodes[1].InnerText = user.Comment;
+                    var nde = FindNode(node.ChildNodes, "Comment");
+                    nde.InnerText = user.Comment;
                 }
 
-                node.ChildNodes[2].InnerText = user.Email;
-                node.ChildNodes[3].InnerText = user.LastLoginDate.ToString(
+                FindNode(node.ChildNodes, "Email").InnerText = user.Email;
+                FindNode(node.ChildNodes, "LastLoginTime").InnerText = user.LastLoginDate.ToString(
                     "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
                 doc.Save(XmlFullyQualifiedPath);
                 this.users[Blog.CurrentInstance.Id][user.UserName] = user;
             }
+        }
+        private XmlNode FindNode(XmlNodeList list, string nodeName)
+        {
+            if (list.Count > 0)
+            {
+                foreach (XmlNode node in list)
+                {
+                    if (node.Name.Equals(nodeName)) return node;
+                    if (node.HasChildNodes) FindNode(node.ChildNodes, nodeName);
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -873,29 +894,29 @@
                     nodes.Cast<XmlNode>().Select(
                         node => new MembershipUser(
                                     this.Name,
-                            // Provider name
+                                    // Provider name
                                     node["UserName"].InnerText,
-                            // Username
+                                    // Username
                                     node["UserName"].InnerText,
-                            // providerUserKey
+                                    // providerUserKey
                                     node["Email"].InnerText,
-                            // Email
+                                    // Email
                                     string.Empty,
-                            // passwordQuestion
+                                    // passwordQuestion
                                     node["Password"].InnerText,
-                            // Comment
+                                    // Comment
                                     true,
-                            // approved
+                                    // approved
                                     false,
-                            // isLockedOut
+                                    // isLockedOut
                                     DateTime.Now,
-                            // creationDate
+                                    // creationDate
                                     DateTime.Parse(node["LastLoginTime"].InnerText, CultureInfo.InvariantCulture),
-                            // lastLoginDate
+                                    // lastLoginDate
                                     DateTime.Now,
-                            // lastActivityDate
+                                    // lastActivityDate
                                     DateTime.Now,
-                            // lastPasswordChangedDate
+                                    // lastPasswordChangedDate
                                     new DateTime(1980, 1, 1))))
                 {
                     this.users[blogId].Add(user.UserName, user);

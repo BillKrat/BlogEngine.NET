@@ -81,10 +81,11 @@ namespace App_Code.Controls
                 var fileName = string.Format("{0}Custom/Widgets/{1}/widget.cshtml", 
                     Utils.ApplicationRelativeWebRoot, 
                     widget.InnerText);
+
                 try
                 {
                     var model = new { Id = widget.Attributes["id"].Value, Name = widget.InnerText, Title = widget.Attributes["title"].Value };
-                    var lit = new Literal { Text = RazorHelpers.ParseRazor(fileName, model) };
+                    var lit = new Literal { Text = RazorHelpers.ParseRazor(fileName, model, this.ID) };
                     Controls.Add(lit);
                 }
                 catch (Exception ex)

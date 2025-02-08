@@ -337,7 +337,7 @@
                 context.Response.End();
             }
 
-            var doc = new XmlDocument() { XmlResolver = null };
+            var doc = new XmlDocument();
             doc.LoadXml(xml);
             return doc;
         }

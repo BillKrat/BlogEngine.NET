@@ -24,7 +24,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>@BlogSettings.Instance.Name (@Security.CurrentMembershipUser.UserName)</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link href='http://adventuresOnTheEdge.net/styles/roboto.css' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/admincss")
     <link href="~/admin/themes/standard/css/styles.css?ver=4" rel="stylesheet">
     <link rel="shortcut icon" href="@Href(Utils.ApplicationRelativeWebRoot + "Content/images/blog/blogengine.ico")" type="image/x-icon" />
@@ -32,7 +32,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
     <script type="text/javascript">
-        var UserVars = { Name: '@Html.Raw(Security.CurrentUser.Identity.Name)', IsAdmin: '@Security.IsAdministrator', Rights: ['@Html.Raw(userRights)'] };
+        var UserVars = { Name: '@Html.Raw(Security.CurrentUser.Identity.Name)', IsAdmin: '@Security.IsAdministrator', Rights: ['@Html.Raw(userRights)']  };
         var ActiveTheme = '@BlogSettings.Instance.Theme'
         var UsageScenario = '@BlogConfig.UsageScenario'
         var ServerTime = '@DateTime.Now'

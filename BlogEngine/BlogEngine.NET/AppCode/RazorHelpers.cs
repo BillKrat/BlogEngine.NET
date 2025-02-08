@@ -170,7 +170,7 @@ public static class RazorHelpers
 
     public const string RAZOR_HOST_PAGE_VPATH = "~/Custom/Themes/RazorHost/page.cshtml";
 
-    public static string ParseRazor(string virtualPath, object model)
+    public static string ParseRazor(string virtualPath, object model, string id)
     {
         string pageVPath = virtualPath;
 
@@ -186,7 +186,9 @@ public static class RazorHelpers
                 System.Web.WebPages.WebPage webpage = inst as System.Web.WebPages.WebPage;
                 webpage.VirtualPath = pageVPath;
                 StringWriter writer = new StringWriter();
-                webpage.ExecutePageHierarchy(new System.Web.WebPages.WebPageContext(wrapper, webpage, model), writer, webpage);
+                var wpc = new System.Web.WebPages.WebPageContext(wrapper, webpage, model);
+                wrapper.Cache["widgetid"] = id;
+                webpage.ExecutePageHierarchy(wpc, writer, webpage);
                 string content = writer.ToString();
 
                 return content;

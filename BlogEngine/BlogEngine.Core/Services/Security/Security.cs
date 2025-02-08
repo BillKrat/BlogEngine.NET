@@ -185,7 +185,10 @@ namespace BlogEngine.Core
                     string returnUrl = context.Request.QueryString["returnUrl"];
 
                     // ignore Return URLs not beginning with a forward slash, such as remote sites.
-                    if (Security.IsLocalUrl(returnUrl))
+                    if (string.IsNullOrWhiteSpace(returnUrl) || !returnUrl.StartsWith("/"))
+                        returnUrl = null;
+
+                    if (!string.IsNullOrWhiteSpace(returnUrl))
                     {
                         context.Response.Redirect(returnUrl);
                     }
@@ -199,19 +202,6 @@ namespace BlogEngine.Core
             }
 
             return false;
-        }
-
-        private static bool IsLocalUrl(string url)
-        {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return false;
-            }
-            else
-            {
-                return ((url[0] == '/' && (url.Length == 1 || (url[1] != '/' && url[1] != '\\'))) || // "/" or "/foo" but not "//" or "/\" 
-						(url.Length > 1 && url[0] == '~' && url[1] == '/')); // "~/" or "~/foo"
-            }
         }
 
         private const string AUTH_TKT_USERDATA_DELIMITER = "-|-";
@@ -366,6 +356,93 @@ namespace BlogEngine.Core
         public static bool IsAuthorizedTo(Rights right)
         {
             return Right.HasRight(right, Security.GetCurrentUserRoles());
+        }
+
+        public static bool IsInRole(Post page)
+        {
+            // If their is a CustomField then we'll need to see if it is our
+            // Role field - if there are no custom fields then there is nothing to do
+            // so we'll exit.
+            if (page.CustomFields == null || page.CustomFields.Count == 0)
+                return true;
+            try
+            {
+                var roleConstraint = page.CustomFields.FirstOrDefault(r => r.Key.ToLower() == "role");
+
+                // There are custom fields - just no roles so we're good to show it
+                if (roleConstraint.Key == null)
+                    return true;
+
+                // Get a list of roles that the user is authorized to be in
+                var userRoles = GetCurrentUserRoles();
+
+                // If here then we have role[s] to process
+                var pageRoles = roleConstraint.Value.Value.Split(',').Select(r => r.Trim());
+
+                var isAuthorized = false;
+                foreach (var pageRole in pageRoles)
+                {
+                    // If user is authorized via the role then we'll return true
+                    if (userRoles.Contains(pageRole))
+                        isAuthorized = true;
+                }
+
+                // If there are roles for this page and the user is not in list
+                // then we'll return false;
+                return isAuthorized;
+            }
+            catch (Exception ex)
+            {
+                // Don't let errors interfere with page being displayed
+                return true;
+            }
+        }
+
+        public static bool IsInRole(Page page)
+        {
+            // If their is a CustomField then we'll need to see if it is our
+            // Role field - if there are no custom fields then there is nothing to do
+            // so we'll exit.
+            if (page.CustomFields==null || page.CustomFields.Count == 0)
+                return true;
+
+            var roleConstraint = page.CustomFields.FirstOrDefault(r => r.Key.ToLower() == "role");
+
+            // There are custom fields - just no roles so we're good to show it
+            if (roleConstraint.Key == null)
+                return true;
+
+            // Get a list of roles that the user is authorized to be in
+            var userRoles = GetCurrentUserRoles();
+
+            // If here then we have role[s] to process
+            var pageRoles = roleConstraint.Value.Value.Split(',').Select(r => r.Trim());
+
+            var isAuthorized = false;
+            foreach(var pageRole in pageRoles)
+            {
+                // If user is authorized via the role then we'll return true
+                if (userRoles.Contains(pageRole))
+                    isAuthorized = true;
+            }
+
+            // If there are roles for this page and the user is not in list
+            // then we'll return false;
+            return isAuthorized;
+        }
+
+        /// <summary>
+        /// Returns whether or not the current user has the passed in Right.
+        /// </summary>
+        /// <param name="rights"></param>
+        /// <returns></returns>
+        public static bool IsAuthorizedTo(IEnumerable<Rights> rights)
+        {
+            foreach (var right in rights)
+                if (Right.HasRight(right, Security.GetCurrentUserRoles()))
+                    return true;
+
+            return false;
         }
 
         /// <summary>

@@ -56,7 +56,8 @@ public partial class page : BlogBasePage
 
         if (pg == null || (!pg.IsVisible))
         {
-            this.Response.Redirect($"{Utils.RelativeWebRoot}error404.aspx", true);
+            // If page is not found (could be security issue) then go to root 
+            this.Response.Redirect($"~/{Utils.RelativeWebRoot}", true);
             return; // WLF: ReSharper is stupid and doesn't know that redirect returns this method.... or does it not...?
         }
 

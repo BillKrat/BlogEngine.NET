@@ -16,10 +16,19 @@
     {
         #region Constants and Fields
 
+        private List<ExtensionSettings> _settings = new List<ExtensionSettings>();
         /// <summary>
         /// The settings.
         /// </summary>
-        private List<ExtensionSettings> settings;
+        private List<ExtensionSettings> settings
+        {
+            get { 
+                return _settings;
+            }
+            set { 
+                _settings = value; 
+            }
+        }
 
         private List<Guid> blogs;
 
@@ -231,7 +240,8 @@
         /// </returns>
         public bool Initialized(ExtensionSettings xs)
         {
-            return xs != null && this.settings.Where(setItem => setItem.Name == xs.Name).Any(setItem => setItem.Parameters.Count == xs.Parameters.Count);
+            var retval = xs != null && this.settings.Where(setItem => setItem.Name == xs.Name).Any(setItem => setItem.Parameters.Count == xs.Parameters.Count);
+            return retval;
         }
 
         /// <summary>

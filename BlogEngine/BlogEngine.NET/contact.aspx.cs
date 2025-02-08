@@ -10,6 +10,9 @@ using BlogEngine.Core;
 using BlogEngine.Core.Web.Controls;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using BlogEngine.NET.Custom.Widgets;
 
 #endregion
 
@@ -28,9 +31,23 @@ public partial class contact : BlogBasePage, ICallbackEventHandler
             txtName.Text = Request.QueryString["name"];
             txtEmail.Text = Request.QueryString["email"];
 
-            GetCookie();
-            phAttachment.Visible = BlogSettings.Instance.EnableContactAttachments;
-            SetFocus();
+			var mode = Request.QueryString["mode"];
+			if (mode != null)
+			{
+				divForm.Visible = false;
+
+				if (mode == "verify")
+					VerificationConfirmation();
+
+				if (mode == "remove")
+					RemoveEmail();
+			}
+			else
+			{
+				GetCookie();
+				phAttachment.Visible = BlogSettings.Instance.EnableContactAttachments;
+				SetFocus();
+			}
         }
 
         if (!IsPostBack && !IsCallback)
@@ -42,6 +59,30 @@ public partial class contact : BlogBasePage, ICallbackEventHandler
         Page.Title = Server.HtmlEncode(Resources.labels.contact);
         base.AddMetaTag("description", Utils.StripHtml(BlogSettings.Instance.ContactFormMessage));
     }
+
+	private void RemoveEmail()
+	{
+		divRemoveNotification.Visible = true;
+
+		var email = Request.QueryString["email"];
+		lblEmailRemoved.InnerText = email;
+
+		Newsletter.RemoveEmail(
+			Request.QueryString["id"],
+			email);
+	}
+
+	private void VerificationConfirmation()
+	{
+		divVerified.Visible = true;
+		
+		var email = Request.QueryString["email"];
+		lblEmail.InnerText = email;
+
+		Newsletter.EmailVerified(
+			Request.QueryString["id"],
+			email);
+	}
 
 	/// <summary>
 	/// Sets the focus on the first empty textbox.
@@ -229,28 +270,23 @@ public partial class contact : BlogBasePage, ICallbackEventHandler
 
     public void RaiseCallbackEvent(string eventArgument)
     {
-        string[] arg = eventArgument.Split(new string[] { "-||-" }, StringSplitOptions.None);
-        if (arg.Length == 6)
+        try
         {
-            string name = arg[0];
-            string email = arg[1];
-            string subject = arg[2];
-            string message = arg[3];
-
-            string recaptchaResponse = arg[4];
-            string recaptchaChallenge = arg[5];
+            // BillKrat.2018.08.25 - adapted for Google recaptcha V2 ( http://AdventuresOnTheEdge.net )
+            dynamic contact = JObject.Parse(eventArgument);
 
             recaptcha.UserUniqueIdentifier = hfCaptcha.Value;
+
             if (UseCaptcha)
             {
-                if (!recaptcha.ValidateAsync(recaptchaResponse, recaptchaChallenge))
+                if (!recaptcha.ValidateAsync(contact.recaptchaResponse.Value, contact.recaptchaChallenge.Value))
                 {
                     _Callback = "RecaptchaIncorrect";
                     return;
                 }
             }
 
-            if (SendEmail(email, name, subject, message))
+            if (SendEmail(contact.email.Value, contact.name.Value, contact.subject.Value, contact.message.Value))
             {
                 _Callback = BlogSettings.Instance.ContactThankMessage;
             }
@@ -258,9 +294,11 @@ public partial class contact : BlogBasePage, ICallbackEventHandler
             {
                 _Callback = BlogSettings.Instance.ContactErrorMessage;
             }
+
         }
-        else
+        catch (Exception ex)
         {
+            Debug.WriteLine(ex.Message + ex.StackTrace);
             _Callback = BlogSettings.Instance.ContactErrorMessage;
         }
     }

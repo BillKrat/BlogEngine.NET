@@ -53,15 +53,13 @@
         /// <summary>
         ///     Gets an XmlReader that converts BlogML data saved as string into XML stream
         /// </summary>
-        private XmlReader XmlReader
+        private XmlTextReader XmlReader
         {
             get
             {
                 var byteArray = Encoding.UTF8.GetBytes(this.xmlData);
                 var stream = new MemoryStream(byteArray);
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.XmlResolver = null;
-                return XmlReader.Create(stream, settings);
+                return new XmlTextReader(stream);
             }
         }
 

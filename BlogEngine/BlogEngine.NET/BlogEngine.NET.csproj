@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BlogEngine.NET</RootNamespace>
     <AssemblyName>BlogEngine.NET</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -66,6 +70,7 @@
       <HintPath>..\packages\SimpleInjector.Integration.WebApi.3.1.0\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting">
@@ -78,8 +83,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -110,13 +113,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -141,6 +144,9 @@
     <Content Include="admin\app\custom\widgets\widgetGallery.html" />
     <Content Include="admin\app\custom\widgets\widgetGalleryController.js" />
     <Content Include="admin\app\custom\widgets\widgetView.html" />
+    <Content Include="admin\app\dashboard\dashboardView.html" />
+    <Content Include="admin\app\security\contacts\contactController.js" />
+    <Content Include="admin\app\security\contacts\contactView.html" />
     <Content Include="admin\themes\standard\css\styles.css" />
     <Content Include="admin\themes\standard\img\logo-sidebar.png" />
     <Content Include="admin\themes\standard\img\profile.png" />
@@ -544,28 +550,32 @@
     <Content Include="Content\images\blog\xfn\me.gif" />
     <Content Include="Content\images\blog\xfn\sweet.gif" />
     <Content Include="Content\images\blog\xfn\sweetMet.gif" />
+    <Content Include="Content\images\HeadBang.gif" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\star-rating.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Custom\Controls\Defaults\CommentView.ascx" />
     <Content Include="Custom\Controls\Defaults\PostView.ascx" />
     <Content Include="Custom\Media\sample.flv" />
-    <Content Include="Custom\Themes\Standard-2017\CommentForm.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\CommentView.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\newsletter.html" />
-    <Content Include="Custom\Themes\Standard-2017\PostNavigation.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\PostView.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\RelatedPosts.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\src\css\bootstrap.min.css" />
-    <Content Include="Custom\Themes\Standard-2017\src\css\font-awesome.min.css" />
-    <Content Include="Custom\Themes\Standard-2017\src\css\styles.min.css" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.svg" />
-    <Content Include="Custom\Themes\Standard-2017\src\img\logo.png" />
-    <Content Include="Custom\Themes\Standard-2017\src\js\bootstrap.min.js" />
-    <Content Include="Custom\Themes\Standard-2017\src\js\custom.js" />
-    <Content Include="Custom\Themes\Standard-2017\theme.png" />
-    <Content Include="Custom\Themes\Standard-2017\theme.xml" />
-    <Content Include="Custom\Themes\Standard-2017\WidgetContainer.ascx" />
+    <Content Include="Custom\Themes\ContactManager\Changelog.txt" />
+    <Content Include="Custom\Themes\ContactManager\CommentView.ascx" />
+    <Content Include="Custom\Themes\ContactManager\img\BtnSearch.png" />
+    <Content Include="Custom\Themes\ContactManager\img\effect_1.png" />
+    <Content Include="Custom\Themes\ContactManager\img\effect_2.png" />
+    <Content Include="Custom\Themes\ContactManager\img\effect_3.png" />
+    <Content Include="Custom\Themes\ContactManager\img\logo.png" />
+    <Content Include="Custom\Themes\ContactManager\img\nav.png" />
+    <Content Include="Custom\Themes\ContactManager\img\social.png" />
+    <Content Include="Custom\Themes\ContactManager\img\success.png" />
+    <Content Include="Custom\Themes\ContactManager\img\up.png" />
+    <Content Include="Custom\Themes\ContactManager\include\index.js" />
+    <Content Include="Custom\Themes\ContactManager\include\modernizr.js" />
+    <Content Include="Custom\Themes\ContactManager\include\styles.min.css" />
+    <Content Include="Custom\Themes\ContactManager\newsletter.html" />
+    <Content Include="Custom\Themes\ContactManager\PostView.ascx" />
+    <Content Include="Custom\Themes\ContactManager\theme.xml" />
+    <Content Include="Custom\Themes\ContactManager\WidgetContainer.ascx" />
     <Content Include="Custom\Themes\Standard\CommentForm.ascx" />
     <Content Include="Custom\Themes\Standard\CommentView.ascx" />
     <Content Include="Custom\Themes\Standard\newsletter.html" />
@@ -596,7 +606,9 @@
     <Content Include="Custom\Widgets\AuthorList\screenshot.png" />
     <Content Include="Custom\Widgets\AuthorList\widget.xml" />
     <Content Include="Custom\Widgets\BlogList\screenshot.png" />
-    <Content Include="Custom\Widgets\BlogList\widget.xml" />
+    <Content Include="Custom\Widgets\BlogList\widget.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Custom\Widgets\BlogRoll\screenshot.png" />
     <Content Include="Custom\Widgets\BlogRoll\widget.xml" />
     <Content Include="Custom\Widgets\CategoryList\screenshot.png" />
@@ -625,6 +637,15 @@
     <Content Include="packages.config" />
     <Content Include="Content\images\blog\ext.png" />
     <Content Include="Content\images\blog\pkg.png" />
+    <Content Include="pics-photosByDi\blogengine.ico" />
+    <Content Include="pics-photosByDi\Gallery\favicon-16x16.png" />
+    <Content Include="pics-photosByDi\Gallery\favicon-192x192.png" />
+    <Content Include="pics-photosByDi\Gallery\favicon-32x32.png" />
+    <Content Include="pics-photosByDi\Gallery\favicon.ico" />
+    <Content Include="pics-photosByDi\Gallery\favicon.png" />
+    <Content Include="pics\blogengine.ico" />
+    <Content Include="pics\headbang.gif" />
+    <Content Include="pics\logo.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -760,14 +781,10 @@
     <Content Include="Custom\Widgets\CategoryList\edit.cshtml" />
     <Content Include="admin\themes\standard\README.md" />
     <Content Include="admin\themes\standard\scss\rtl\_rtl.widgets.scss" />
-    <Content Include="Custom\Themes\Standard-2017\site.master" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.eot" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\FontAwesome.otf" />
     <Content Include="Custom\Themes\Standard\page.master" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Custom\Themes\ContactManager\site.master" />
+    <None Include="Properties\PublishProfiles\billkrat-001-site2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1505,6 +1522,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.4.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.4.min.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -1567,19 +1586,18 @@
     <Content Include="Scripts\syntaxhighlighter\syntaxhighlighter.htm" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="setup\BillKrat-Upgrade.2018.12.30.sql" />
     <Content Include="setup\Mono\mono_setup.sh" />
     <Content Include="setup\MySQL\Archive\MySQLSetup3.1.0.sql" />
     <Content Include="setup\MySQL\Archive\MySQLSetup3.0.0.sql" />
     <Content Include="setup\MySQL\Archive\MySQLUpgradeFrom3.0To3.1.sql" />
     <Content Include="setup\MySQL\Archive\MySQLUpgradeFrom2.6To3.0.sql" />
     <Content Include="setup\MySQL\Archive\MySQLWeb.Config" />
-    <Content Include="setup\MySQL\MySql.Data.dll" />
     <Content Include="setup\MySQL\Setup.sql" />
     <Content Include="setup\SQLite\BlogEngine.s3db" />
     <Content Include="setup\SQLite\Archive\SQLiteUpgradeFrom3.0To3.1.txt" />
     <Content Include="setup\SQLite\Archive\SQLiteUpgradeFrom2.6To3.0.txt" />
     <Content Include="setup\SQLite\SQLiteWeb.Config" />
-    <Content Include="setup\SQLite\System.Data.SQLite.dll" />
     <Content Include="setup\SQLServer\Setup.sql" />
     <Content Include="setup\SQLServer\Archive\MSSQLSetup3.1.0.0.sql" />
     <Content Include="setup\SQLServer\Upgrade.sql" />
@@ -1587,7 +1605,6 @@
     <Content Include="setup\SQLServer\DbWeb.Config" />
     <Content Include="setup\SQL_CE\Archive\SQL_CE_Setup_3.1.sql" />
     <Content Include="setup\SQL_CE\Archive\SQL_CE_UpgradeFrom3.0to3.1.sql" />
-    <Content Include="setup\SQL_CE\BlogEngine.sdf" />
     <Content Include="setup\SQL_CE\SQL_CE_Web.Config" />
     <Content Include="setup\TestFiles\sample.flv" />
     <Content Include="setup\upgrade\bootstrap.min.css" />
@@ -1597,19 +1614,16 @@
     <Content Include="setup\upgrade\spinner.gif" />
     <Content Include="setup\upgrade\Updater.asmx" />
     <Content Include="setup\upgrade\Updater.js" />
-    <Content Include="Custom\Themes\RazorHost\page.cshtml" />
-    <Content Include="Custom\Themes\RazorHost\site.master" />
     <Content Include="setup\upgrade\index.cshtml" />
     <Content Include="Scripts\syntaxhighlighter\syntaxhighlighter.version" />
     <Content Include="setup\Web.config" />
     <Content Include="Scripts\version.json" />
     <Content Include="setup\MySQL\MySQLWeb.Config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <None Include="Web.Config" />
+    <None Include="Web.Config.Sql.Config" />
+    <Content Include="styles\domine.css" />
+    <Content Include="styles\roboto.css" />
+    <Content Include="TextFile1.txt" />
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
@@ -1637,7 +1651,6 @@
     <Content Include="admin\Extensions\Settings.ascx" />
     <Content Include="admin\Extensions\Settings.aspx" />
     <Content Include="admin\menu.ascx" />
-    <Content Include="admin\app\dashboard\dashboardView.html" />
     <Content Include="admin\app\settings\advancedView.html" />
     <Content Include="admin\app\settings\basicView.html" />
     <Content Include="admin\app\settings\emailView.html" />
@@ -1647,12 +1660,16 @@
     <Content Include="admin\app\security\roles\roleView.html" />
     <Content Include="App_Data\blogroll.xml" />
     <Content Include="App_Data\blogs.xml" />
-    <Content Include="App_Data\blogs\_new\categories.xml" />
+    <Content Include="App_Data\blogs\_new\categories.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\blogs\_new\datastore\widgets\be_WIDGET_ZONE.xml" />
     <Content Include="App_Data\blogs\_new\pingservices.xml" />
     <Content Include="App_Data\blogs\_new\posts\c3b491e5-59ac-4f6a-81e5-27e971b903ed.xml" />
     <Content Include="App_Data\blogs\_new\rights.xml" />
-    <Content Include="App_Data\blogs\_new\roles.xml" />
+    <Content Include="App_Data\blogs\_new\roles.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\blogs\_new\settings.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1736,7 +1753,6 @@
     <Content Include="Scripts\mediaelement\mediaelementplayer.js" />
     <Content Include="Scripts\mediaelement\mediaelementplayer.min.css" />
     <Content Include="Scripts\mediaelement\mediaelementplayer.min.js" />
-    <Content Include="Scripts\mediaelement\silverlightmediaelement.xap" />
     <Content Include="Scripts\textext.js" />
     <Content Include="search.aspx" />
     <Content Include="setup\Mono\ReadMe.txt" />
@@ -1793,19 +1809,10 @@
     <Content Include="setup\SQL_CE\Archive\SQL_CE_UpgradeFrom2.6to3.0.sql" />
     <Content Include="setup\TestFiles\sample.png" />
     <Content Include="setup\TestFiles\sample.txt" />
-    <Content Include="Custom\Themes\RazorHost\CommentForm.ascx" />
-    <Content Include="Custom\Themes\RazorHost\CommentView.ascx" />
-    <Content Include="Custom\Themes\RazorHost\PostNavigation.ascx" />
-    <Content Include="Custom\Themes\RazorHost\PostView.ascx" />
-    <Content Include="Custom\Themes\RazorHost\RelatedPosts.ascx" />
-    <Content Include="Custom\Themes\RazorHost\WidgetContainer.ascx" />
     <Content Include="Custom\Controls\CommentList.ascx" />
     <Content Include="Custom\Controls\Defaults\CommentForm.ascx" />
     <Content Include="Custom\Controls\Defaults\PostNavigation.ascx" />
     <Content Include="Custom\Controls\PostList.ascx" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="wlwmanifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -2153,6 +2160,10 @@
     <Compile Include="contact.aspx.designer.cs">
       <DependentUpon>contact.aspx</DependentUpon>
     </Compile>
+    <Content Include="Custom\Themes\ContactManager\site.master.cs">
+      <DependentUpon>site.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Compile Include="Custom\Widgets\CategoryList\CategoryList.cs" />
     <Compile Include="Custom\Widgets\Common.cs" />
     <Compile Include="Custom\Widgets\LinkList\LinkList.cs" />
@@ -2208,13 +2219,6 @@
     <Compile Include="search.aspx.designer.cs">
       <DependentUpon>search.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Custom\Themes\RazorHost\site.master.cs">
-      <DependentUpon>site.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Custom\Themes\RazorHost\site.master.designer.cs">
-      <DependentUpon>site.master</DependentUpon>
-    </Compile>
     <Compile Include="Custom\Controls\CommentList.ascx.cs">
       <DependentUpon>CommentList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2234,6 +2238,14 @@
     <ProjectReference Include="..\BlogEngine.Core\BlogEngine.Core.csproj">
       <Project>{9ed9914a-fb6e-4d21-8c71-9122e8c3076b}</Project>
       <Name>BlogEngine.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogEngine.Wiki\BlogEngine.Wiki.csproj">
+      <Project>{a70f3293-c041-4d2a-827c-d8adb8d81d7a}</Project>
+      <Name>BlogEngine.Wiki</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gwn.BlogEngine.Library\Gwn.BlogEngine.Library.csproj">
+      <Project>{2cdc075d-b71c-40c2-852c-2a47a43d3847}</Project>
+      <Name>Gwn.BlogEngine.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -2424,6 +2436,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_code\" />
     <Folder Include="App_Data\datastore\extensions\" />
     <Folder Include="App_Data\files\" />
     <Folder Include="App_Data\packages\" />
@@ -2449,7 +2462,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64079</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64079/</IISUrl>
+          <IISUrl>http://localhost:64080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

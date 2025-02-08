@@ -191,7 +191,9 @@
         /// </returns>
         public static bool ImportSettings(ExtensionSettings settings)
         {
-            return ImportSettings(settings.Name, settings);
+            var name = settings.Name;
+            var importedSettings = ImportSettings(name, settings);
+            return importedSettings;
         }
 
         /// <summary>

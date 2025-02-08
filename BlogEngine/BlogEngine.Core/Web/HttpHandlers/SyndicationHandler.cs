@@ -185,7 +185,7 @@
                         client.Encoding = Encoding.Default;
                         using (var stream = client.OpenRead(context.Request.QueryString["apml"]))
                         {
-                            var doc = new XmlDocument() { XmlResolver = null };
+                            var doc = new XmlDocument();
                             if (stream != null)
                             {
                                 doc.Load(stream);

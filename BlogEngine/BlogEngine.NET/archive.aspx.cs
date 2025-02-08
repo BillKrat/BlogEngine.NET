@@ -88,7 +88,9 @@ public partial class archive : BlogEngine.Core.Web.Controls.BlogBasePage
                 if (!categories.Contains(cat.Title))
                 {
                     string name = cat.Title;
-                    List<Post> list = cat.Posts.FindAll(delegate(Post p) { return p.IsVisible; });
+                    List<Post> list = cat.Posts.FindAll(delegate(Post p) {
+						return p.IsVisible && BlogSettings.Instance.IsPpostShown(p); 
+					});
 
                     HtmlGenericControl h2 = CreateRowHeader(cat, name, list.Count);
                     phArchive.Controls.Add(h2);
@@ -96,7 +98,7 @@ public partial class archive : BlogEngine.Core.Web.Controls.BlogBasePage
                     HtmlTable table = CreateTable(name);
                     foreach (Post post in list)
                     {
-                        CreateTableRow(table, post);
+	                    CreateTableRow(table, post);
                     }
 
                     phArchive.Controls.Add(table);
@@ -105,7 +107,10 @@ public partial class archive : BlogEngine.Core.Web.Controls.BlogBasePage
             }
 		}
 
-		List<Post> noCatList = Post.ApplicablePosts.FindAll(delegate(Post p) { return p.Categories.Count == 0 && p.IsVisible; });
+		List<Post> noCatList = Post.ApplicablePosts.FindAll(delegate(Post p) { 
+			return p.Categories.Count == 0 && p.IsVisible && BlogSettings.Instance.IsPpostShown(p); 
+		});
+
 		if (noCatList.Count > 0)
 		{
 			string name = Resources.labels.uncategorized;
@@ -115,7 +120,7 @@ public partial class archive : BlogEngine.Core.Web.Controls.BlogBasePage
 			HtmlTable table = CreateTable(name);
 			foreach (Post post in noCatList)
 			{
-				CreateTableRow(table, post);
+					CreateTableRow(table, post);
 			}
 
 			phArchive.Controls.Add(table);
@@ -227,7 +232,11 @@ public partial class archive : BlogEngine.Core.Web.Controls.BlogBasePage
 	{
 		int comments = 0;
 		int raters = 0;
-		List<Post> posts = Post.ApplicablePosts.FindAll(delegate(Post p) { return p.IsVisible; });
+		int totalPosts = 0;
+
+		List<Post> posts = Post.ApplicablePosts.FindAll(delegate(Post p) { 
+			return p.IsVisible && BlogSettings.Instance.IsPpostShown(p); 
+		});
 		foreach (Post post in posts)
 		{
 			comments += post.ApprovedComments.Count;

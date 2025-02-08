@@ -930,7 +930,7 @@ namespace BlogEngine.Core.Providers
                     // Do this again to make sure _provider is still null
                     if (_provider == null)
                     {
-                        // Get a reference to the <blogProvider> section
+                        // Get a reference to the <blogProvider> sect`ion
                         var section =
                             (BlogProviderSection)WebConfigurationManager.GetSection("BlogEngine/blogProvider");
 

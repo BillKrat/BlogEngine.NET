@@ -1,10 +1,12 @@
 ﻿namespace UserControls
 {
-    using BlogEngine.Core;
-    using BlogEngine.Core.Web.Controls;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.UI;
+
+    using BlogEngine.Core;
+    using BlogEngine.Core.Web.Controls;
 
     /// <summary>
     /// The post list user control.
@@ -121,14 +123,10 @@
                 return;
             }
 
-            var theme = Request.QueryString["theme"];
-            if(!string.IsNullOrEmpty(theme))
-                theme = theme.SanitizePath();
-
-            var path = string.Format("{0}Custom/Themes/{1}/PostView.ascx", Utils.ApplicationRelativeWebRoot, BlogSettings.Instance.GetThemeWithAdjustments(theme));
+            var path = string.Format("{0}Custom/Themes/{1}/PostView.ascx", Utils.ApplicationRelativeWebRoot, BlogSettings.Instance.GetThemeWithAdjustments(this.Request.QueryString["theme"]));
             var counter = 0;
 
-            if (!System.IO.File.Exists(Server.MapPath(path)))
+            if(!System.IO.File.Exists(Server.MapPath(path)))
                 path = string.Format("{0}Custom/Controls/Defaults/PostView.ascx", Utils.ApplicationRelativeWebRoot);
 
             foreach (Post post in visiblePosts.GetRange(index, stop))
@@ -137,6 +135,9 @@
                 {
                     break;
                 }
+
+                if(!BlogSettings.Instance.IsPpostShown(post))
+                        continue;
 
                 var postView = (PostViewBase)this.LoadControl(path);
                 postView.ShowExcerpt = ShowExcerpt();

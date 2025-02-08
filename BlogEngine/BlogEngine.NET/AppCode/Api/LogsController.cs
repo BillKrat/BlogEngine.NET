@@ -34,7 +34,7 @@ public class LogsController : ApiController
         if (!Security.IsAuthorizedTo(BlogEngine.Core.Rights.AccessAdminPages))
             throw new System.UnauthorizedAccessException();
 
-        string fileLocation = HostingEnvironment.MapPath(Path.Combine(BlogConfig.StorageLocation, "logger.txt"));
+        string fileLocation = HostingEnvironment.MapPath(Path.Combine(BlogEngine.Core.Blog.CurrentInstance.StorageLocation, "logger.txt"));
         try
         {
             File.Delete(fileLocation);
@@ -53,7 +53,7 @@ public class LogsController : ApiController
 
     IEnumerable<SelectOption> GetLogFile()
     {
-        string fileLocation = HostingEnvironment.MapPath(Path.Combine(BlogConfig.StorageLocation, "logger.txt"));
+        string fileLocation = HostingEnvironment.MapPath(Path.Combine(BlogEngine.Core.Blog.CurrentInstance.StorageLocation, "logger.txt"));
         var items = new List<SelectOption>();
     
         if (File.Exists(fileLocation))

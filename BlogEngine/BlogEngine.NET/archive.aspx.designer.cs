@@ -9,8 +9,9 @@
 
 
 
-public partial class archive {
-    
+public partial class archive
+{
+
     /// <summary>
     /// ulMenu control.
     /// </summary>
@@ -19,7 +20,7 @@ public partial class archive {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulMenu;
-    
+
     /// <summary>
     /// phArchive control.
     /// </summary>
@@ -28,7 +29,7 @@ public partial class archive {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.PlaceHolder phArchive;
-    
+
     /// <summary>
     /// ltPosts control.
     /// </summary>
@@ -37,7 +38,7 @@ public partial class archive {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Literal ltPosts;
-    
+
     /// <summary>
     /// ltComments control.
     /// </summary>
@@ -46,7 +47,7 @@ public partial class archive {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Literal ltComments;
-    
+
     /// <summary>
     /// ltRaters control.
     /// </summary>

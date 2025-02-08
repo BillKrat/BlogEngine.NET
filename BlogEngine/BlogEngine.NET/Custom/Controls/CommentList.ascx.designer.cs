@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UserControls {
-    
-    
-    public partial class CommentList {
-        
+namespace UserControls
+{
+
+
+    public partial class CommentList
+    {
+
         /// <summary>
         /// phComments control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phComments;
-        
+
         /// <summary>
         /// phTrckbacks control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phTrckbacks;
-        
+
         /// <summary>
         /// phAddComment control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phAddComment;
-        
+
         /// <summary>
         /// phCommentForm control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phCommentForm;
-        
+
         /// <summary>
         /// hiddenReplyTo control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hiddenReplyTo;
-        
+
         /// <summary>
         /// simplecaptcha control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::App_Code.Controls.SimpleCaptchaControl simplecaptcha;
-        
+
         /// <summary>
         /// recaptcha control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::App_Code.Controls.RecaptchaControl recaptcha;
-        
+
         /// <summary>
         /// hfCaptcha control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfCaptcha;
-        
+
         /// <summary>
         /// lbCommentsDisabled control.
         /// </summary>

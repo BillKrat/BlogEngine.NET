@@ -29,10 +29,6 @@ public class UploadController : ApiController
             fileName = fileName.Replace("image.jpg", DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
             fileName = fileName.Replace("image.png", DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".png");
 
-            var root = Blog.CurrentInstance.StorageLocation + Utils.FilesFolder;
-
-            dirPath = dirPath.SanitizePath(root);
-            
             if (!string.IsNullOrEmpty(dirPath))
                 dirName = dirPath;
 
@@ -64,8 +60,6 @@ public class UploadController : ApiController
                     dir = BlogService.GetDirectory("/avatars");
                     var dot = fileName.LastIndexOf(".");
                     var ext = dot > 0 ? fileName.Substring(dot) : "";
-                    if (User.Identity.Name.Contains("/") || User.Identity.Name.Contains(@"\"))
-                        throw new ApplicationException("Invalid character detected in UserName");
                     var profileFileName = User.Identity.Name + ext;
 
                     var imgPath = HttpContext.Current.Server.MapPath(dir.FullPath + "/" + profileFileName);

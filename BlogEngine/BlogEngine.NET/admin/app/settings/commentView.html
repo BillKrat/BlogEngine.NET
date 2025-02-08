@@ -23,7 +23,7 @@
                     <div class="checkbox"><label><input type="checkbox" name="ckShowLivePreview" data-ng-model="settings.ShowLivePreview" data-ng-disabled="settings.IsCommentsEnabled == false || settings.CommentProvider > 0" /> {{lbl.showLivePreview}}</label></div>
                     <div class="checkbox"><label><input type="checkbox" name="ckEnableWebsiteInComments" data-ng-model="settings.EnableWebsiteInComments" data-ng-disabled="settings.IsCommentsEnabled == false || settings.CommentProvider > 0" /> {{lbl.showEnableWebsiteInComments}}</label></div>
                     <div class="form-group">
-                        <label for="closeDaysOptions">{{lbl.closeCommetsAfter}}</label>
+                        <label for="closeDaysOptions">{{lbl.closeCommetsAfter}}  (If set to 365 then only Posts that have a category of "Public" will be shown if user is not authorized)</label>
                         <select class="form-control" id="closeDaysOptions" ng-options="o.OptionName for o in vm.CloseDaysOptions" ng-model="selCloseDays" ng-disabled="settings.IsCommentsEnabled == false || settings.CommentProvider > 0"></select>
                     </div>
                 </div>

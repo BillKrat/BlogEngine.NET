@@ -41,8 +41,8 @@ namespace BlogEngine.NET.App_Start
                     {
                         Path = "~/Scripts/jquery-2.1.4.min.js",
                         DebugPath = "~/Scripts/jquery-2.1.4.js",
-                        CdnPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.4.min.js",
-                        CdnDebugPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.4.js"
+                        CdnPath = "http://adventuresOnTheEdge.net/scripts/jQuery/jquery-2.1.4.min.js",
+                        CdnDebugPath = "http://adventuresOnTheEdge.net/scripts/jQuery/jquery-2.1.4.js"
                     });
 
                 _initializedAlready = true;
@@ -105,14 +105,14 @@ namespace BlogEngine.NET.App_Start
 
             bundles.Add(
                 new ScriptBundle("~/scripts/blogadmin")
-                .Include("~/Scripts/jquery-{version}.js")
+                .Include("~/Scripts/jquery-2.1.4.js")
                 .Include("~/Scripts/jquery.form.js")
                 .Include("~/Scripts/jquery.validate.js")
                 .Include("~/Scripts/jquery-ui.js")
                 .Include("~/Scripts/toastr.js")
                 .Include("~/Scripts/bootstrap.js")
                 .Include("~/Scripts/moment.js")
-                .Include("~/Scripts/Q.js")
+                //.Include("~/Scripts/Q.js")
                 .Include("~/Scripts/angular.min.js")
                 .Include("~/Scripts/angular-route.min.js")
                 .Include("~/Scripts/angular-sanitize.min.js") 
@@ -139,6 +139,7 @@ namespace BlogEngine.NET.App_Start
                 .Include("~/admin/app/custom/widgets/widgetController.js")
                 .Include("~/admin/app/custom/widgets/widgetGalleryController.js")
 
+                .Include("~/admin/app/security/contacts/contactController.js")
                 .Include("~/admin/app/security/users/userController.js")
                 .Include("~/admin/app/security/roles/roleController.js")
                 .Include("~/admin/app/security/profile/profileController.js")

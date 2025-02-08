@@ -1,0 +1,112 @@
+﻿@using BlogEngine.NET.Custom.Widgets
+@{
+    var showThanks = false;
+    var showForm = false;
+    var showMsg = false;
+    var showCaptcha = false;
+
+    var email = Request.Form["txtNewsletterEmail"];
+
+    if (this.Request.Path.Contains("contact.aspx") || this.Request.Path.Contains("post.aspx"))
+    {
+        return;
+    }
+
+    if (IsPost)
+    {
+        try
+        {
+            var zoneid = this.Cache["widgetid"] ?? "";
+            var isMobileZone = (zoneid.ToString() == "WidgetZone3");
+            var isMobile = BlogEngine.Core.Utils.IsMobile;
+
+            // If mobile - we'll just save results with no regards to recaptcha
+            if(isMobile)
+            {
+                if (isMobileZone)
+                {
+                    var addr = new System.Net.Mail.MailAddress(email);
+                    NewsletterR1.AddEmail(email, this);
+                    showThanks = true;
+                }
+            }
+            else
+            {
+                var results = Request.Params["g-recaptcha-response"];
+                if (string.IsNullOrEmpty(results))
+                {
+                    showForm = true;
+                    showCaptcha = true;
+                }
+                else
+                {
+                    if (!isMobileZone)
+                    {
+                        var addr = new System.Net.Mail.MailAddress(email);
+                        NewsletterR1.AddEmail(email, this);
+                        showThanks = true;
+                    }
+                }
+            }
+        }
+        catch
+        {
+            showForm = true;
+            showMsg = true;
+        }
+    }
+    else
+    {
+        showForm = true;
+    }
+}
+    <div class="Widget widget newsletter">
+        <script type="text/javascript">
+            var onloadCallback = function () {
+                grecaptcha.render('html_element', {
+                    'sitekey': '6LdaUGwUAAAAAMWPyUb5OSoCgSKxR4AC3liClnfO'
+                });
+            };
+        </script>
+        <h4 class="WidgetHeader widget-header">@Model.Title</h4>
+
+        <div class="WidgetContent widget-content">
+            @if (showThanks)
+            {
+                <div style="padding: 20px 40px" id="newsletterthanks">
+                    <h2 id="newsletteraction">@Resources.labels.thankYou</h2>
+                    <p>
+                        You will receive an email to confirm that you wish to be notified
+                        when we provide new information.
+                    </p>
+                </div>
+            }
+            @if (showForm)
+            {
+                <div id="newsletterform">
+                    @Resources.labels.notifiedPublished<br /><br />
+                    <label style="font-weight:bold" for="txtEmailName">@Resources.labels.displayName</label>
+                    <input type="text" style="width:98%;" class="form-control" id="txtEmailName" name="txtEmailName" />
+                    <label style="font-weight:bold" for="txtNewsletterEmail">@Resources.labels.enterEmail</label>
+                    <input type="text" style="width:98%;" class="form-control" id="txtNewsletterEmail" name="txtNewsletterEmail" />
+                    @if (showMsg)
+                    {
+                        <span>@Resources.labels.enterEmailAddress</span>
+                    }
+                    @if (showCaptcha)
+                    {
+                        <span>You must check the checkbox</span>
+                    }
+
+                    <div name="html_element" id="html_element"></div>
+                    <div style="text-align:center; margin-top: 10px">
+                        <input type="submit" class="btn btn-primary" id="btnSave" onclick="this.value='Working...'" name="btnSave" value="@Resources.labels.notifyMe" />
+                        <input type="submit" class="btn btn-primary" id="btnList" onclick="this.value='Working...'" name="btnList" value="Show List" />
+                    </div>
+                    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                            async defer>
+                    </script>
+                </div>
+            }
+        </div>
+    </div>

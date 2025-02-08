@@ -1,6 +1,7 @@
 ﻿namespace BlogEngine.Core.Web.Controls
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// All extensions must decorate the class with this attribute.
@@ -144,6 +145,7 @@
     /// <summary>
     /// Helper class for sorting extensions by priority
     /// </summary>
+    [DebuggerDisplay("{Name} {Priority} {SubBlogEnabled} {Type}")]
     public class SortedExtension
     {
         #region Constants and Fields

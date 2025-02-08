@@ -9,8 +9,9 @@
 
 
 
-public partial class contact {
-    
+public partial class contact
+{
+
     /// <summary>
     /// divForm control.
     /// </summary>
@@ -19,7 +20,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlGenericControl divForm;
-    
+
     /// <summary>
     /// txtName control.
     /// </summary>
@@ -28,7 +29,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtName;
-    
+
     /// <summary>
     /// txtEmail control.
     /// </summary>
@@ -37,7 +38,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtEmail;
-    
+
     /// <summary>
     /// txtSubject control.
     /// </summary>
@@ -46,7 +47,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtSubject;
-    
+
     /// <summary>
     /// txtMessage control.
     /// </summary>
@@ -55,7 +56,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtMessage;
-    
+
     /// <summary>
     /// phAttachment control.
     /// </summary>
@@ -64,7 +65,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.PlaceHolder phAttachment;
-    
+
     /// <summary>
     /// txtAttachment control.
     /// </summary>
@@ -73,7 +74,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.FileUpload txtAttachment;
-    
+
     /// <summary>
     /// recaptcha control.
     /// </summary>
@@ -82,7 +83,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::App_Code.Controls.RecaptchaControl recaptcha;
-    
+
     /// <summary>
     /// hfCaptcha control.
     /// </summary>
@@ -91,7 +92,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.HiddenField hfCaptcha;
-    
+
     /// <summary>
     /// btnSend control.
     /// </summary>
@@ -100,7 +101,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnSend;
-    
+
     /// <summary>
     /// lblStatus control.
     /// </summary>
@@ -109,7 +110,7 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblStatus;
-    
+
     /// <summary>
     /// divThank control.
     /// </summary>
@@ -118,4 +119,40 @@ public partial class contact {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlGenericControl divThank;
+
+    /// <summary>
+    /// divVerified control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divVerified;
+
+    /// <summary>
+    /// lblEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmail;
+
+    /// <summary>
+    /// divRemoveNotification control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRemoveNotification;
+
+    /// <summary>
+    /// lblEmailRemoved control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmailRemoved;
 }

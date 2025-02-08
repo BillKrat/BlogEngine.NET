@@ -452,7 +452,7 @@
     <value>Previous post</value>
   </data>
   <data name="previousPosts" xml:space="preserve">
-    <value>Older posts</value>
+    <value>Next page</value>
   </data>
   <data name="publish" xml:space="preserve">
     <value>Publish</value>
@@ -2594,7 +2594,7 @@
   <data name="changeName" xml:space="preserve">
     <value>Change Name</value>
   </data>
-  <data name="share" xml:space="preserve">
-    <value>Share</value>
+  <data name="contacts" xml:space="preserve">
+    <value>Contacts</value>
   </data>
 </root>

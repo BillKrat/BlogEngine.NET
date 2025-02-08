@@ -32,18 +32,48 @@
             <asp:FileUpload runat="server" id="txtAttachment" data-id="txtAttachment"/>
           </asp:placeholder>
         </div>
-      <blog:RecaptchaControl runat="server" ID="recaptcha" />
+      <blog:RecaptchaControl runat="server" ID="recaptcha" /><div id="recaptchaMessage" style="display:none; color:red"> REQUIRED</div>
+
       <asp:HiddenField runat="server" ID="hfCaptcha" />
       <div class="text-right btn-wrapper">
-        <asp:button runat="server" id="btnSend" class="btn btn-primary" Text="<%$Resources:labels, send %>" OnClientClick="return beginSendMessage();" validationgroup="contact" data-id="btnSend" />    
+
+        <asp:button runat="server" id="btnSend" class="btn btn-primary" 
+            Text="<%$Resources:labels, send %>" 
+            OnClientClick="return beginSendMessage();" 
+            validationgroup="contact" 
+            data-id="btnSend" />    
+
         <asp:label runat="server" id="lblStatus" visible="false"><%=BlogSettings.Instance.ContactErrorMessage %>.</asp:label>
       </div>
     </div>
     <div id="thanks">
       <div id="divThank" data-id="divThank" runat="Server" visible="False">      
-      <div><%=BlogSettings.Instance.ContactThankMessage %></div>
+        <div><%=BlogSettings.Instance.ContactThankMessage %></div>
       </div>
     </div>
+    <div id="verification">
+      <div id="divVerified" data-id="divVerified" runat="Server" visible="False">      
+          Thank you for verifying your email 
+          <strong>
+              <label  id="lblEmail" runat="server"></label>
+          </strong>
+          <p>
+          You will receive notifications when new information is made available
+          </p>
+      </div>
+    </div>
+    <div id="removeNotifications">
+      <div id="divRemoveNotification" data-id="divRemoveNotification" runat="Server" visible="False">      
+          Your email account
+          <strong>
+              <label  id="lblEmailRemoved" runat="server"></label>
+          </strong> has been removed.
+          <p>
+          You will no longer receive notifications
+          </p>
+      </div>
+    </div>
+
   </div>
   <script type="text/javascript" src="<%=Utils.ApplicationRelativeWebRoot %>Scripts/contact.js"></script>
 </asp:content>
