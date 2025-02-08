@@ -637,15 +637,10 @@
     <Content Include="packages.config" />
     <Content Include="Content\images\blog\ext.png" />
     <Content Include="Content\images\blog\pkg.png" />
-    <Content Include="pics-photosByDi\blogengine.ico" />
-    <Content Include="pics-photosByDi\Gallery\favicon-16x16.png" />
-    <Content Include="pics-photosByDi\Gallery\favicon-192x192.png" />
-    <Content Include="pics-photosByDi\Gallery\favicon-32x32.png" />
-    <Content Include="pics-photosByDi\Gallery\favicon.ico" />
-    <Content Include="pics-photosByDi\Gallery\favicon.png" />
     <Content Include="pics\blogengine.ico" />
     <Content Include="pics\headbang.gif" />
     <Content Include="pics\logo.png" />
+    <Content Include="pics\new.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />

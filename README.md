@@ -1,3 +1,7 @@
+The Master branch is the original fork of the remote branch - for historical purposes (only updated to support .NET 4.8)
+
+![New](blogengine/blogengine.net/pics/new.png)
+[Use this branch [Upgrade] for updates made to code to maintain original functionality](https://github.com/BillKrat/BlogEngine.NET/tree/Upgrade)
 <br>
 <p>
     <strong>BlogEngine</strong> is an open source blogging platform since 2007.<br>Easily customizable. Many free built-in Themes, Widgets, and Plugins.
