@@ -145,6 +145,9 @@
     <Content Include="admin\themes\standard\img\logo-sidebar.png" />
     <Content Include="admin\themes\standard\img\profile.png" />
     <Content Include="App_Data\datastore\widgets\deb9fd7c-e0f4-4f24-964d-d5f67332bab0.xml" />
+    <Content Include="App_Data\files\350x150.png" />
+    <Content Include="App_Data\files\blogengine.png" />
+    <Content Include="App_Data\files\logo.png" />
     <Content Include="App_Data\posts\f39c3289-e861-48f7-a4b7-edaaffe6f6dc.xml" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -2425,7 +2428,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\datastore\extensions\" />
-    <Folder Include="App_Data\files\" />
     <Folder Include="App_Data\packages\" />
     <Folder Include="App_Data\pages\" />
     <Folder Include="bin\" />
