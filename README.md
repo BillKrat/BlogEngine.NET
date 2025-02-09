@@ -1,4 +1,4 @@
-The Master branch is the original fork of the remote branch - for historical purposes (only updated to support .NET 4.8)
+The Master branch is the original fork of the remote branch - for historical purposes (updated to support .NET 4.8)
 
 ![New](https://github.com/BillKrat/BlogEngine.NET/blob/Upgrade/BlogEngine/BlogEngine.NET/pics/new.png)
 [Use this branch [Upgrade] for updates made to code to maintain original functionality](https://github.com/BillKrat/BlogEngine.NET/tree/Upgrade)
