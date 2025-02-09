@@ -778,10 +778,6 @@
     <Content Include="admin\themes\standard\scss\rtl\_rtl.widgets.scss" />
     <Content Include="Custom\Themes\Standard\page.master" />
     <Content Include="Custom\Themes\ContactManager\site.master" />
-    <None Include="Properties\PublishProfiles\billkrat-001-site2 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\billkrat-001-site3 - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\billkrat-001-site3 - FTP1.pubxml" />
-    <None Include="Properties\PublishProfiles\billkrat-001-site3 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\billkrat-001-site3 - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -1618,7 +1614,9 @@
     <Content Include="setup\Web.config" />
     <Content Include="Scripts\version.json" />
     <Content Include="setup\MySQL\MySQLWeb.Config" />
-    <None Include="Web.Config" />
+    <None Include="Web.Config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Web.Config.Sql.Config" />
     <Content Include="styles\domine.css" />
     <Content Include="styles\roboto.css" />
