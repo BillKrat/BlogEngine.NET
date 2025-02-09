@@ -1614,9 +1614,9 @@
     <Content Include="setup\Web.config" />
     <Content Include="Scripts\version.json" />
     <Content Include="setup\MySQL\MySQLWeb.Config" />
-    <None Include="Web.Config">
+    <Content Include="Web.Config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Web.Config.Sql.Config" />
     <Content Include="styles\domine.css" />
     <Content Include="styles\roboto.css" />
