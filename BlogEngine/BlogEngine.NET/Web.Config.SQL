@@ -23,8 +23,8 @@
     </blogFileSystemProvider>
   </BlogEngine>
   <connectionStrings>
-    <!-- My BlogEngine connection string resides in my machine.config so it doesn't get checked in by mistake -->
-    <!--<add name="BlogEngine" connectionString="Data Source=[server];User ID=[userName];Password=[password];Initial Catalog=[databaseName];"  providerName="System.Data.SqlClient"/>-->
+	  <clear/>
+	  <add name="BlogEngine" connectionString="Data Source=xxxx;User ID=xxxx;Password=xxxx;Initial Catalog=xxxx" providerName="System.Data.SqlClient"/>
   </connectionStrings>
   <appSettings>
     <!-- Override default application settings here -->

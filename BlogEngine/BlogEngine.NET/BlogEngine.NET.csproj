@@ -800,8 +800,6 @@
     <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff" />
     <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff2" />
     <Content Include="Custom\Themes\Standard-2017\src\fonts\FontAwesome.otf" />
-    <None Include="Properties\PublishProfiles\billkrat-001-site3 - Web Deploy1.pubxml" />
-    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1639,10 +1637,9 @@
     <Content Include="Web.Config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Web.Config.Sql.Config" />
+    <Content Include="Web.Config.SQL" />
     <Content Include="styles\domine.css" />
     <Content Include="styles\roboto.css" />
-    <Content Include="TextFile1.txt" />
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>

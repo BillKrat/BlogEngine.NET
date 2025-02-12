@@ -196,3 +196,8 @@ BlogEngine/BlogEngine.NET/App_Data/datastore/extensions/*.xml
 /BlogEngine/Gwn.BlogEngine.Library/.vs
 /BlogEngine/BlogEngine.Wiki.Test/.vs
 /BlogEngine/BlogEngine.Tests/.vs
+/BlogEngine/BlogEngine.NET/Properties/PublishProfiles/billkrat-001-site3 - Web Deploy1.pubxml.user
+/BlogEngine/BlogEngine.NET/Properties/PublishProfiles/FolderProfile.pubxml
+/BlogEngine/BlogEngine.NET/Properties/PublishProfiles/FolderProfile.pubxml.user
+/BlogEngine/BlogEngine.NET/Properties/PublishProfiles/billkrat-001-site3 - Web Deploy1.pubxml
+/.gitignore
