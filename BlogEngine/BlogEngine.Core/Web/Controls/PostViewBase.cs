@@ -103,9 +103,9 @@
         /// <summary>
         ///     Gets or sets a value indicating how many characters should be shown of the description.
         /// </summary>
-        public int DescriptionCharacters 
-        { 
-            get 
+        public int DescriptionCharacters
+        {
+            get
             {
                 int chars = 0;
                 string url = HttpContext.Current.Request.RawUrl.ToUpperInvariant();
@@ -215,8 +215,15 @@
                     sb.AppendFormat(
                         CultureInfo.InvariantCulture,
                         "<a href=\"{0}\">{1}</a> | ",
-                    Post.Blog.AbsoluteWebRoot + "admin/app/editor/editpost.cshtml?id=" + Post.Id,
+                        Post.Blog.AbsoluteWebRoot + "admin/app/editor/editpost.cshtml",
+                        Utils.Translate("add"));
+
+                    sb.AppendFormat(
+                        CultureInfo.InvariantCulture,
+                        "<a href=\"{0}\">{1}</a> | ",
+                        Post.Blog.AbsoluteWebRoot + "admin/app/editor/editpost.cshtml?id=" + Post.Id,
                         Utils.Translate("edit"));
+
                 }
 
                 if (Post.CanUserDelete)
@@ -226,7 +233,7 @@
                             Utils.Translate("areYouSure"),
                             Utils.Translate("delete").ToLowerInvariant(),
                             Utils.Translate("thePost"));
-                       
+
                     sb.AppendFormat(
                         CultureInfo.InvariantCulture,
                         "<a href=\"#\" onclick=\"if (confirm('{2}')) location.href='{0}?deletepost={1}'\">{3}</a> | ",
@@ -353,7 +360,7 @@
             {
                 var tag = tags[i];
                 tagStrings[i] = string.Format(
-                    CultureInfo.InvariantCulture, Link, Post.Blog.AbsoluteWebRoot, 
+                    CultureInfo.InvariantCulture, Link, Post.Blog.AbsoluteWebRoot,
                     HttpUtility.UrlEncode(tag), HttpUtility.HtmlEncode(tag));
             }
 
