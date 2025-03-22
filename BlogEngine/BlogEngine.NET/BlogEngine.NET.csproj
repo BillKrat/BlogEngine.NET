@@ -800,6 +800,8 @@
     <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff" />
     <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff2" />
     <Content Include="Custom\Themes\Standard-2017\src\fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\AdventuresOnTheEdge-FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\AdventuresOnTheEdge.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
